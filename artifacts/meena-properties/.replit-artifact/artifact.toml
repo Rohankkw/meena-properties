@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Meena Properties"
+version = "1.0.0"
+id = "artifacts/meena-properties"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22481
+
+[services.development]
+run = "pnpm --filter @workspace/meena-properties run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/meena-properties", "run", "build" ]
+publicDir = "artifacts/meena-properties/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22481"
+BASE_PATH = "/"
